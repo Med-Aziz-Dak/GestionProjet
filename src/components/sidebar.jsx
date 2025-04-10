@@ -1,30 +1,62 @@
-import AddProject from './createButton';
-import ProjectFormModal from './ProjectFormModal';
-const Sidebar = ( ) => {
-    onst [projects, setProjects] = useState([]);
-  const [showModal, setShowModal] = useState(false);
+import React , { useState } from 'react';
+import { FiPlus, FiFolder } from 'react-icons/fi';
+import CreateProjectForm from './CreateProjectForm';
+import './form.css'
+import './Sidebar.css';
 
-  const handleSaveProject = (newProject) => {
-    setProjects([...projects, { ...newProject, id: Date.now() }]);
-    setShowModal(false);
-  };
-
+const Sidebar = ({ projects, activeProject, onProjectSelect, onProjectDetails }) => {
+    const [showForm, setShowForm] = useState(false);
+  
+    const handleSaveSuccess = () => {
+      setShowForm(false);
+    
+    };
+  
+    const handleCancel = () => {
+      setShowForm(false);
+    
+    };
+  
   return (
     <div className="sidebar">
-      <h1>YOUR<br />PROJECTS</h1>
+      <h2 className="sidebar-title">YOUR PROJECTS</h2>
       
-      <AddProject onClick={() => setShowModal(true)} />
-      
-      {projects.length === 0 && <EmptyState />}
+      <button 
+        className="add-project-btn"
+        onClick={() => setShowForm(true)}      >
 
-      {showModal && (
-        <ProjectFormModal 
-          onSave={handleSaveProject} 
-          onClose={() => setShowModal(false)} 
-        />
-      )}
+        <FiPlus className="btn-icon" />
+        Add Project
+      </button>
+
+      <div className="projects-list">
+        {projects.length > 0 ? (
+          projects.map(project => (
+            <div 
+            
+              key={project.id} 
+              className={`project-item ${activeProject === project.id ? 'active' : ''}`}
+              onClick={() => onProjectSelect(project.id)
+
+                
+                
+                
+              }
+            >
+              <FiFolder className="project-icon" />
+              <span 
+        onClick={onProjectDetails}>{project.title}
+                
+              </span>
+            </div>
+          ))
+        ) : (
+          <div className="empty-message">No projects yet</div>
+        )}
+      </div>
+    
     </div>
   );
-}
+};
 
-export default Sidebar
+export default Sidebar;
