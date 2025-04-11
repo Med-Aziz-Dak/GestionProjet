@@ -1,7 +1,5 @@
 import React , { useState } from 'react';
 import { FiPlus, FiFolder } from 'react-icons/fi';
-import CreateProjectForm from './CreateProjectForm';
-import './form.css'
 import './Sidebar.css';
 
 const Sidebar = ({ projects, activeProject, onProjectSelect, onProjectDetails }) => {
@@ -37,9 +35,6 @@ const Sidebar = ({ projects, activeProject, onProjectSelect, onProjectDetails })
               key={project.id} 
               className={`project-item ${activeProject === project.id ? 'active' : ''}`}
               onClick={() => onProjectSelect(project.id)
-
-                
-                
                 
               }
             >
