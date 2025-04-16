@@ -1,0 +1,6 @@
+.custom-form-style input,
+.custom-form-style textarea,
+.custom-form-style button,
+.custom-form-style h1 , h2 ,h3 {
+  color: #333; 
+} 
